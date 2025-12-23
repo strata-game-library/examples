@@ -2,35 +2,28 @@
 
 Example applications demonstrating [@jbcom/strata](https://github.com/jbcom/nodejs-strata) - procedural 3D graphics for React Three Fiber.
 
-## Examples
+## Status
+
+🚧 **Initial examples in progress** - See [open PRs](https://github.com/jbcom/nodejs-strata-examples/pulls)
+
+## Planned Examples
 
 | Example | Description |
 |---------|-------------|
-| [basic-terrain](./basic-terrain) | Simple terrain generation with height maps |
-| [water-scene](./water-scene) | Water effects with waves and caustics |
-| [sky-volumetrics](./sky-volumetrics) | Procedural sky with volumetric clouds |
-| [vegetation-showcase](./vegetation-showcase) | Instanced vegetation with wind animation |
-| [api-showcase](./api-showcase) | Comprehensive API demonstration |
+| basic-terrain | Simple terrain generation with height maps |
+| water-scene | Water effects with waves and caustics |
+| sky-volumetrics | Procedural sky with volumetric clouds |
+| vegetation-showcase | Instanced vegetation with wind animation |
+| api-showcase | Comprehensive API demonstration |
 
 ## Quick Start
 
 ```bash
-# Clone this repository
 git clone https://github.com/jbcom/nodejs-strata-examples.git
-cd nodejs-strata-examples
-
-# Install dependencies for an example
-cd basic-terrain
+cd nodejs-strata-examples/basic-terrain
 pnpm install
-
-# Run the development server
 pnpm dev
 ```
-
-## Requirements
-
-- Node.js >= 20
-- pnpm (recommended) or npm
 
 ## Dependencies
 

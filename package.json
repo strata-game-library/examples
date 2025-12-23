@@ -2,37 +2,11 @@
   "name": "@jbcom/strata-examples",
   "version": "1.0.0",
   "private": true,
-  "description": "Example applications for Strata 3D - terrain, water, vegetation, sky, and volumetrics demos",
-  "type": "module",
-  "scripts": {
-    "dev:basic-terrain": "cd basic-terrain && pnpm dev",
-    "dev:water-scene": "cd water-scene && pnpm dev",
-    "dev:sky-volumetrics": "cd sky-volumetrics && pnpm dev",
-    "dev:vegetation-showcase": "cd vegetation-showcase && pnpm dev",
-    "build": "pnpm -r build",
-    "install:all": "pnpm -r install"
-  },
+  "description": "Example applications for Strata 3D",
   "repository": {
     "type": "git",
     "url": "https://github.com/jbcom/nodejs-strata-examples"
   },
-  "homepage": "https://github.com/jbcom/nodejs-strata-examples#readme",
-  "bugs": {
-    "url": "https://github.com/jbcom/nodejs-strata-examples/issues"
-  },
   "author": "Jon Bogaty <jon@jonbogaty.com>",
-  "license": "MIT",
-  "keywords": [
-    "strata",
-    "react-three-fiber",
-    "threejs",
-    "examples",
-    "terrain",
-    "water",
-    "vegetation",
-    "sky",
-    "volumetrics",
-    "3d",
-    "webgl"
-  ]
+  "license": "MIT"
 }
