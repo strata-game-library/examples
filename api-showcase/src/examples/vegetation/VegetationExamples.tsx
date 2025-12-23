@@ -8,6 +8,7 @@
  */
 
 import * as THREE from 'three';
+import type { BiomeData } from '@jbcom/strata';
 import {
     createVegetationMesh,
     createGrassInstances,
@@ -15,8 +16,6 @@ import {
     createRockInstances,
     generateInstanceData,
 } from '@jbcom/strata';
-
-type BiomeData = any;
 
 /**
  * Example 1: Basic Grass Instances
