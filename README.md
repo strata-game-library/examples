@@ -79,6 +79,18 @@ All examples depend on the published `@jbcom/strata` npm package.
 - [Strata Shaders](https://github.com/jbcom/nodejs-strata-shaders) - GLSL shader collection
 - [Strata Presets](https://github.com/jbcom/nodejs-strata-presets) - Pre-configured settings
 
+## CI/CD
+
+This repository uses GitHub Actions to verify that all examples build correctly with the latest version of `@jbcom/strata`.
+
+The verification runs:
+- On every push to `main`
+- On every pull request
+- Weekly to check for breaking changes in `@jbcom/strata`
+
+### Visual Regression Tests (Planned)
+Future updates will include automated visual regression tests using Playwright/E2E to ensure visual consistency across strata versions.
+
 ## License
 
 MIT © [Jon Bogaty](https://github.com/jbcom)
