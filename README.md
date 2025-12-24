@@ -2,27 +2,31 @@
 
 Example applications demonstrating [@jbcom/strata](https://github.com/jbcom/nodejs-strata) - procedural 3D graphics for React Three Fiber.
 
-## Status
+## Live Demos
 
-🚧 **Initial examples in progress** - See [open PRs](https://github.com/jbcom/nodejs-strata-examples/pulls)
+- 🚀 [Basic Terrain](https://jbcom.github.io/nodejs-strata-examples/basic-terrain/)
+- 🌊 [Water Scene](https://jbcom.github.io/nodejs-strata-examples/water-scene/)
+- ☁️ [Sky & Volumetrics](https://jbcom.github.io/nodejs-strata-examples/sky-volumetrics/)
+- 🌿 [Vegetation Showcase](https://jbcom.github.io/nodejs-strata-examples/vegetation-showcase/)
+- 🔍 [API Showcase](https://jbcom.github.io/nodejs-strata-examples/api-showcase/)
 
-## Planned Examples
+## Examples
 
-| Example | Description |
-|---------|-------------|
-| basic-terrain | Simple terrain generation with height maps |
-| water-scene | Water effects with waves and caustics |
-| sky-volumetrics | Procedural sky with volumetric clouds |
-| vegetation-showcase | Instanced vegetation with wind animation |
-| api-showcase | Comprehensive API demonstration |
+| Example | Description | Status |
+|---------|-------------|--------|
+| [basic-terrain](./basic-terrain) | Simple terrain generation with height maps | ✅ Ready |
+| [water-scene](./water-scene) | Water effects with waves and caustics | ✅ Ready |
+| [sky-volumetrics](./sky-volumetrics) | Procedural sky with volumetric clouds | ✅ Ready |
+| [vegetation-showcase](./vegetation-showcase) | Instanced vegetation with wind animation | ✅ Ready |
+| [api-showcase](./api-showcase) | Comprehensive API demonstration | 🚧 In Progress |
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/jbcom/nodejs-strata-examples.git
-cd nodejs-strata-examples/basic-terrain
+git clone https://github.com/jbcom/strata-examples.git
+cd strata-examples
 pnpm install
-pnpm dev
+pnpm build
 ```
 
 ## Dependencies
@@ -36,12 +40,6 @@ All examples use the published npm package:
   }
 }
 ```
-
-## Related
-
-- [@jbcom/strata](https://github.com/jbcom/nodejs-strata) - Main library
-- [@jbcom/strata-capacitor-plugin](https://github.com/jbcom/nodejs-strata-capacitor-plugin) - Mobile support (Capacitor)
-- [@jbcom/strata-react-native-plugin](https://github.com/jbcom/nodejs-strata-react-native-plugin) - Mobile support (React Native)
 
 ## License
 

@@ -1,0 +1,101 @@
+name: Build and Deploy Examples
+
+on:
+  push:
+    branches: [ main, fix/issue-4 ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          
+      - name: Install dependencies
+        run: pnpm install
+        
+      - name: Build examples
+        run: |
+          mkdir -p dist
+          
+          # Build each example
+          for example in basic-terrain water-scene sky-volumetrics vegetation-showcase api-showcase; do
+            echo "Building $example..."
+            cd $example
+            pnpm build --base=/nodejs-strata-examples/$example/
+            mkdir -p ../dist/$example
+            cp -r dist/* ../dist/$example/
+            cd ..
+          done
+          
+          # Create root index.html
+          cat <<EOF > dist/index.html
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Strata 3D Examples</title>
+              <style>
+                  body { font-family: sans-serif; background: #0a0f1a; color: white; padding: 2rem; }
+                  h1 { color: #06b6d4; }
+                  ul { list-style: none; padding: 0; }
+                  li { margin-bottom: 1rem; }
+                  a { color: #06b6d4; text-decoration: none; font-size: 1.2rem; }
+                  a:hover { text-decoration: underline; }
+                  .description { color: #888; font-size: 0.9rem; margin-top: 0.2rem; }
+              </style>
+          </head>
+          <body>
+              <h1>Strata 3D Examples</h1>
+              <ul>
+                  <li>
+                      <a href="basic-terrain/">Basic Terrain</a>
+                      <div class="description">Simple terrain generation with height maps</div>
+                  </li>
+                  <li>
+                      <a href="water-scene/">Water Scene</a>
+                      <div class="description">Water rendering demo with waves and caustics</div>
+                  </li>
+                  <li>
+                      <a href="sky-volumetrics/">Sky & Volumetrics</a>
+                      <div class="description">Sky and cloud effects with day/night cycle</div>
+                  </li>
+                  <li>
+                      <a href="vegetation-showcase/">Vegetation Showcase</a>
+                      <div class="description">Trees, grass, and rocks with wind animation</div>
+                  </li>
+                  <li>
+                      <a href="api-showcase/">API Showcase</a>
+                      <div class="description">Full API demonstration and reference</div>
+                  </li>
+              </ul>
+          </body>
+          </html>
+          EOF
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        if: github.ref == 'refs/heads/main'
