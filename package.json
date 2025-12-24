@@ -16,6 +16,7 @@
     "dev:water": "pnpm --filter water-scene dev",
     "dev:sky": "pnpm --filter sky-volumetrics dev",
     "dev:vegetation": "pnpm --filter vegetation-showcase dev",
+    "dev:api": "pnpm --filter api-showcase dev",
     "typecheck": "pnpm -r typecheck",
     "test:visual": "playwright test"
   },

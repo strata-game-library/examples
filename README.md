@@ -2,6 +2,10 @@
 
 Example applications for [Strata 3D](https://github.com/jbcom/nodejs-strata).
 
+## Live Demos
+
+Visit the **[Live Examples Dashboard](https://jbcom.github.io/nodejs-strata-examples/)** to see Strata 3D in action.
+
 ## Examples
 
 ### Live Dashboard (New!)
