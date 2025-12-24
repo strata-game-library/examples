@@ -33,6 +33,7 @@ function Terrain() {
       positions.setY(i, height);
     }
 
+    positions.needsUpdate = true;
     geo.computeVertexNormals();
     return geo;
   }, []);

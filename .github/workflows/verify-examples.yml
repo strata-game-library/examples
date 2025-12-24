@@ -44,9 +44,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Update @jbcom/strata to latest
-        run: |
-          pnpm update --recursive @jbcom/strata@latest
-
       - name: Build all examples
         run: pnpm build

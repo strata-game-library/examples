@@ -10,9 +10,6 @@
 import * as THREE from 'three';
 import {
     createWaterMaterial,
-    createAdvancedWaterMaterial,
-    Water,
-    AdvancedWater,
 } from '@jbcom/strata';
 
 /**

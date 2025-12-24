@@ -1,23 +1,15 @@
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sky, Stats } from '@react-three/drei';
-import { useControls, button, folder } from 'leva';
-import { useMemo, useRef, useState, useEffect } from 'react';
+import { useControls } from 'leva';
+import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import {
     createGrassInstances,
     createTreeInstances,
     createRockInstances,
-    Water,
-    ProceduralSky,
-    createVegetationMesh,
-    generateInstanceData,
     fbm,
-    noise3D,
-    getTerrainHeight,
-    sdTerrain,
-    getBiomeAt,
+    BiomeData,
 } from '@jbcom/strata';
-type BiomeData = any;
 
 /**
  * Vegetation Showcase Example
@@ -92,7 +84,7 @@ function ProceduralTerrain() {
         }
     );
 
-    const { geometry, colorData } = useMemo(() => {
+    const { geometry } = useMemo(() => {
         const geo = new THREE.PlaneGeometry(size, size, segments, segments);
         geo.rotateX(-Math.PI / 2);
 
@@ -160,10 +152,11 @@ function ProceduralTerrain() {
             colors[i * 3 + 2] = color.b;
         }
 
+        positions.needsUpdate = true;
         geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
         geo.computeVertexNormals();
 
-        return { geometry: geo, colorData: colors };
+        return { geometry: geo };
     }, [size, segments, amplitude, octaves, roughness, seed]);
 
     return (
@@ -187,22 +180,19 @@ function VegetationInstances() {
     // Define biomes for vegetation placement
     const biomes: BiomeData[] = useMemo(() => [
         {
-            name: 'grassland',
-            threshold: 0,
-            color: 0x3a5a2a,
-            vegetation: 1.0,
+            type: 'savanna',
+            center: new THREE.Vector2(0, 0),
+            radius: 50,
         },
         {
-            name: 'forest',
-            threshold: 0.3,
-            color: 0x2a4a1a,
-            vegetation: 1.5,
+            type: 'forest',
+            center: new THREE.Vector2(20, 20),
+            radius: 30,
         },
         {
-            name: 'rocky',
-            threshold: 0.7,
-            color: 0x5a5a4a,
-            vegetation: 0.3,
+            type: 'mountain',
+            center: new THREE.Vector2(-20, -20),
+            radius: 40,
         },
     ], []);
 

@@ -66,9 +66,9 @@ All examples depend on the published `@jbcom/strata` npm package.
 {
   "dependencies": {
     "@jbcom/strata": "^1.3.0",
-    "@react-three/fiber": "^9.0.0",
-    "react": "^18.3.0",
-    "three": "^0.170.0"
+    "@react-three/fiber": "^9.4.2",
+    "react": "^19.2.3",
+    "three": "^0.182.0"
   }
 }
 ```

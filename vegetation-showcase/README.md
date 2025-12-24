@@ -34,22 +34,19 @@ Visit `http://localhost:3002` to see the demo.
 ```typescript
 const biomes: BiomeData[] = [
     {
-        name: 'grassland',
-        threshold: 0,
-        color: 0x3a5a2a,
-        vegetation: 1.0,  // Normal vegetation density
+        type: 'savanna',
+        center: new THREE.Vector2(0, 0),
+        radius: 60,
     },
     {
-        name: 'forest',
-        threshold: 0.3,
-        color: 0x2a4a1a,
-        vegetation: 1.5,  // Increased density in forests
+        type: 'forest',
+        center: new THREE.Vector2(30, 30),
+        radius: 40,
     },
     {
-        name: 'rocky',
-        threshold: 0.7,
-        color: 0x5a5a4a,
-        vegetation: 0.3,  // Sparse vegetation on rocks
+        type: 'mountain',
+        center: new THREE.Vector2(-30, -30),
+        radius: 40,
     },
 ];
 ```
