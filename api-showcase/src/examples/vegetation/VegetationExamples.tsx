@@ -503,12 +503,19 @@ export function Example_CompleteVegetationScene() {
 
     // Define comprehensive biome system
     const grassBiomes: BiomeData[] = [
+        { threshold: 0, color: 0x3a5a2a, vegetation: 1.5 },
+        { threshold: 0.4, color: 0x2a4a1a, vegetation: 0.8 },
+        { threshold: 0.7, color: 0x6a6a5a, vegetation: 0.2 },
     ];
 
     const forestBiomes: BiomeData[] = [
+        { threshold: 0, color: 0x2a4a1a, vegetation: 1.5 },
+        { threshold: 0.6, color: 0x3a5a2a, vegetation: 0.3 },
     ];
 
     const rockyBiomes: BiomeData[] = [
+        { threshold: 0, color: 0x7a7a6a, vegetation: 2.0 },
+        { threshold: 0.6, color: 0x3a5a2a, vegetation: 0.3 },
     ];
 
     const heightFunction = (x: number, z: number): number => {

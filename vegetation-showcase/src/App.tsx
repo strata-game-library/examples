@@ -187,19 +187,16 @@ function VegetationInstances() {
     // Define biomes for vegetation placement
     const biomes: BiomeData[] = useMemo(() => [
         {
-            name: 'grassland',
             threshold: 0,
             color: 0x3a5a2a,
             vegetation: 1.0,
         },
         {
-            name: 'forest',
             threshold: 0.3,
             color: 0x2a4a1a,
             vegetation: 1.5,
         },
         {
-            name: 'rocky',
             threshold: 0.7,
             color: 0x5a5a4a,
             vegetation: 0.3,
@@ -286,7 +283,7 @@ function Scene() {
             />
 
             {/* Stats - for development/demo only */}
-            {process.env.NODE_ENV === 'development' && <Stats />}
+            {import.meta.env.DEV && <Stats />}
         </>
     );
 }
