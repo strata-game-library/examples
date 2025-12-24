@@ -12,7 +12,8 @@ const examples = [
     { name: 'sky-volumetrics', source: 'sky-volumetrics/dist' },
     { name: 'vegetation-showcase', source: 'vegetation-showcase/dist' },
     { name: 'api-showcase', source: 'api-showcase/dist' },
-    { name: 'api-docs', source: 'api-showcase/docs' }
+    { name: 'api-docs', source: 'api-showcase/docs' },
+    { name: 'docs', source: 'docs' }
 ];
 
 function ensureDir(dir) {

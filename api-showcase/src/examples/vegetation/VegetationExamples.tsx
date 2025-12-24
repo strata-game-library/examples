@@ -40,9 +40,9 @@ export function Example_BasicGrassInstances() {
     // Define simple biomes
     const biomes: BiomeData[] = [
         {
-            threshold: 0,
-            color: 0x3a5a2a,
-            vegetation: 1.0,
+            type: 'forest',
+            center: new THREE.Vector2(0, 0),
+            radius: 20,
         },
     ];
 
@@ -88,9 +88,9 @@ export function Example_BasicGrassInstances() {
 export function Example_AdvancedGrassWithHeightFunction() {
     const biomes: BiomeData[] = [
         {
-            threshold: 0,
-            color: 0x3a5a2a,
-            vegetation: 1.0,
+            type: 'forest',
+            center: new THREE.Vector2(0, 0),
+            radius: 40,
         },
     ];
 
@@ -134,22 +134,14 @@ export function Example_AdvancedGrassWithHeightFunction() {
  * ```tsx
  * const biomes: BiomeData[] = [
  *     {
- *         name: 'grassland',
- *         threshold: 0,
- *         color: 0x3a5a2a,
- *         vegetation: 1.5,  // 150% density
+ *         type: 'forest',
+ *         center: new THREE.Vector2(0, 0),
+ *         radius: 30,
  *     },
  *     {
- *         name: 'forest',
- *         threshold: 0.4,
- *         color: 0x2a4a1a,
- *         vegetation: 0.8,  // 80% density (less grass under trees)
- *     },
- *     {
- *         name: 'rocky',
- *         threshold: 0.7,
- *         color: 0x6a6a5a,
- *         vegetation: 0.2,  // 20% density (sparse on rocks)
+ *         type: 'savanna',
+ *         center: new THREE.Vector2(40, 40),
+ *         radius: 20,
  *     },
  * ];
  * ```
@@ -163,19 +155,19 @@ export function Example_AdvancedGrassWithHeightFunction() {
 export function Example_MultiBiomeGrassDistribution() {
     const biomes: BiomeData[] = [
         {
-            threshold: 0,
-            color: 0x3a5a2a,
-            vegetation: 1.5, // Dense grass in open areas
+            type: 'forest',
+            center: new THREE.Vector2(0, 0),
+            radius: 30,
         },
         {
-            threshold: 0.4,
-            color: 0x2a4a1a,
-            vegetation: 0.8, // Less grass under tree canopy
+            type: 'savanna',
+            center: new THREE.Vector2(50, 50),
+            radius: 40,
         },
         {
-            threshold: 0.7,
-            color: 0x6a6a5a,
-            vegetation: 0.2, // Sparse grass on rocky terrain
+            type: 'mountain',
+            center: new THREE.Vector2(-50, -50),
+            radius: 40,
         },
     ];
 
@@ -223,14 +215,14 @@ export function Example_MultiBiomeGrassDistribution() {
 export function Example_TreeInstances() {
     const biomes: BiomeData[] = [
         {
-            threshold: 0,
-            color: 0x2a4a1a,
-            vegetation: 1.5, // Dense trees
+            type: 'forest',
+            center: new THREE.Vector2(0, 0),
+            radius: 60,
         },
         {
-            threshold: 0.6,
-            color: 0x3a5a2a,
-            vegetation: 0.3, // Scattered trees
+            type: 'scrubland',
+            center: new THREE.Vector2(80, 80),
+            radius: 40,
         },
     ];
 
@@ -282,14 +274,14 @@ export function Example_TreeInstances() {
 export function Example_RockInstances() {
     const biomes: BiomeData[] = [
         {
-            threshold: 0,
-            color: 0x7a7a6a,
-            vegetation: 2.0, // High rock density
+            type: 'mountain',
+            center: new THREE.Vector2(0, 0),
+            radius: 40,
         },
         {
-            threshold: 0.6,
-            color: 0x3a5a2a,
-            vegetation: 0.3, // Scattered rocks
+            type: 'scrubland',
+            center: new THREE.Vector2(40, 40),
+            radius: 30,
         },
     ];
 
@@ -347,9 +339,9 @@ export function Example_RockInstances() {
 export function Example_CustomVegetation() {
     const biomes: BiomeData[] = [
         {
-            threshold: 0,
-            color: 0x4a7a3a,
-            vegetation: 1.8, // Dense flowers
+            type: 'marsh',
+            center: new THREE.Vector2(0, 0),
+            radius: 50,
         },
     ];
 
@@ -422,14 +414,14 @@ export function Example_CustomVegetation() {
 export function Example_DirectInstanceGeneration() {
     const biomes: BiomeData[] = [
         {
-            threshold: 0,
-            color: 0x2a4a1a,
-            vegetation: 1.0,
+            type: 'forest',
+            center: new THREE.Vector2(0, 0),
+            radius: 30,
         },
         {
-            threshold: 0.5,
-            color: 0x3a5a2a,
-            vegetation: 0.5,
+            type: 'savanna',
+            center: new THREE.Vector2(30, 30),
+            radius: 30,
         },
     ];
 
@@ -506,19 +498,19 @@ export function Example_CompleteVegetationScene() {
 
     // Define comprehensive biome system
     const grassBiomes: BiomeData[] = [
-        { threshold: 0, color: 0x3a5a2a, vegetation: 1.8 },
-        { threshold: 0.4, color: 0x2a4a1a, vegetation: 0.6 },
-        { threshold: 0.7, color: 0x6a6a5a, vegetation: 0.2 },
+        { type: 'forest', center: new THREE.Vector2(0, 0), radius: 60 },
+        { type: 'savanna', center: new THREE.Vector2(60, 60), radius: 40 },
+        { type: 'mountain', center: new THREE.Vector2(-60, -60), radius: 40 },
     ];
 
     const forestBiomes: BiomeData[] = [
-        { threshold: 0, color: 0x2a4a1a, vegetation: 2.0 },
-        { threshold: 0.6, color: 0x3a5a2a, vegetation: 0.4 },
+        { type: 'forest', center: new THREE.Vector2(0, 0), radius: 80 },
+        { type: 'savanna', center: new THREE.Vector2(80, 80), radius: 20 },
     ];
 
     const rockyBiomes: BiomeData[] = [
-        { threshold: 0, color: 0x7a7a6a, vegetation: 2.5 },
-        { threshold: 0.5, color: 0x3a5a2a, vegetation: 0.5 },
+        { type: 'mountain', center: new THREE.Vector2(-80, -80), radius: 60 },
+        { type: 'scrubland', center: new THREE.Vector2(20, 20), radius: 30 },
     ];
 
     const heightFunction = (x: number, z: number): number => {

@@ -6,7 +6,7 @@
     "description": "Comprehensive API showcase with JSDoc-linked examples for every Strata feature",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
+        "build": "vite build && pnpm run docs",
         "preview": "vite preview",
         "docs": "typedoc --out docs src/examples/index.ts"
     },
