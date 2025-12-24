@@ -2,9 +2,9 @@ name: Verify Examples
 
 on:
   push:
-    branches: [main]
+    branches: ["**"]
   pull_request:
-    branches: [main]
+    branches: ["**"]
   schedule:
     - cron: '0 0 * * 0' # Weekly at midnight on Sunday
   workflow_dispatch:
@@ -50,3 +50,44 @@ jobs:
 
       - name: Build all examples
         run: pnpm build
+
+      - name: Typecheck all examples
+        run: pnpm typecheck
+
+      - name: Create issue on failure
+        if: failure() && github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Examples are broken with latest @jbcom/strata" \
+            --body "The scheduled build failed. This likely means the latest version of @jbcom/strata introduced breaking changes that affect the examples. Please investigate the logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --label "bug,automated"
+
+  visual-regression:
+    name: Visual Regression
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run visual tests
+        # continue-on-error is true because visual baselines need to be committed to the repo first
+        run: pnpm test:visual
+        continue-on-error: true
