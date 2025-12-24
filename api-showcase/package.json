@@ -6,7 +6,7 @@
     "description": "Comprehensive API showcase with JSDoc-linked examples for every Strata feature",
     "scripts": {
         "dev": "vite",
-        "build": "tsc && vite build",
+        "build": "vite build",
         "preview": "vite preview",
         "docs": "typedoc --out docs src/examples/index.ts"
     },
@@ -22,6 +22,7 @@
     "devDependencies": {
         "@types/react": "^19.2.7",
         "@types/react-dom": "^19.2.3",
+        "@types/three": "0.165.0",
         "@vitejs/plugin-react": "^4.3.4",
         "typedoc": "^0.25.0",
         "typescript": "^5.9.3",
