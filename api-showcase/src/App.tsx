@@ -2,9 +2,19 @@ import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { VegetationExamples, WaterExamples, SkyExamples } from './examples';
+import { Water, AdvancedWater, ProceduralSky } from '@jbcom/strata';
 import { Leva } from 'leva';
 
-const ExampleRenderer: React.FC<{ example: any }> = ({ example }) => {
+interface ExampleResult {
+  mesh?: THREE.Mesh;
+  layers?: Record<string, THREE.Mesh>;
+  material?: THREE.Material;
+  component?: string;
+  props?: any;
+  components?: Array<{ type: string; props: any }>;
+}
+
+const ExampleRenderer: React.FC<{ example: () => ExampleResult }> = ({ example }) => {
   const result = example();
   
   if (result.mesh) {
@@ -14,9 +24,39 @@ const ExampleRenderer: React.FC<{ example: any }> = ({ example }) => {
   if (result.layers) {
     return (
       <>
-        {Object.values(result.layers).map((mesh: any, i) => (
+        {Object.values(result.layers).map((mesh, i) => (
           <primitive key={i} object={mesh} />
         ))}
+      </>
+    );
+  }
+
+  if (result.material) {
+    return (
+      <mesh rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[100, 100]} />
+        <primitive object={result.material} attach="material" />
+      </mesh>
+    );
+  }
+
+  const Components: Record<string, any> = { Water, AdvancedWater, ProceduralSky };
+
+  if (result.component && Components[result.component]) {
+    const Comp = Components[result.component];
+    return <Comp {...result.props} />;
+  }
+
+  if (result.components) {
+    return (
+      <>
+        {result.components.map((c, i) => {
+          if (Components[c.type]) {
+            const Comp = Components[c.type];
+            return <Comp key={i} {...c.props} />;
+          }
+          return null;
+        })}
       </>
     );
   }
@@ -95,8 +135,8 @@ const App: React.FC = () => {
         <pointLight position={[100, 100, 100]} castShadow />
         
         {activeTab === 'vegetation' && <ExampleRenderer example={VegetationExamples.Example_CompleteVegetationScene} />}
-        {activeTab === 'water' && <div />}
-        {activeTab === 'sky' && <div />}
+        {activeTab === 'water' && <ExampleRenderer example={WaterExamples.Example_BasicWater} />}
+        {activeTab === 'sky' && <ExampleRenderer example={SkyExamples.Example_BasicSky} />}
       </Canvas>
     </div>
   );

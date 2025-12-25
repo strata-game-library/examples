@@ -422,6 +422,7 @@ export function Example_CustomVegetation() {
 export function Example_DirectInstanceGeneration() {
     const biomes: BiomeData[] = [
         {
+            name: 'forest',
             threshold: 0,
             color: 0x2a4a1a,
             vegetation: 1.0,
