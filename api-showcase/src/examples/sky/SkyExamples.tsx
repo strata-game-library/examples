@@ -9,13 +9,9 @@
 
 import * as THREE from 'three';
 import {
-    ProceduralSky,
-    createSkyMaterial,
-    createSkyGeometry,
     createVolumetricFogMeshMaterial,
     createUnderwaterOverlayMaterial,
 } from '@jbcom/strata';
-import type { TimeOfDayState, WeatherState } from '@jbcom/strata';
 
 /**
  * Example 1: Basic Procedural Sky

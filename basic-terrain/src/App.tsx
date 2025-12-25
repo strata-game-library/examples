@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { fbm } from '@jbcom/strata';
 
 /**
- * Simple terrain using a procedural heightmap
+ * Simple terrain using marching cubes
  *
  * This example shows how to create procedural terrain with Strata's FBM noise.
  * For production use, import from @jbcom/strata instead.
