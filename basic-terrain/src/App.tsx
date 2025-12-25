@@ -26,7 +26,7 @@ function Terrain() {
       const z = positions.getZ(i);
 
       // Use Strata's fractional brownian motion for natural terrain
-      const height = fbm(x * 0.1, z * 0.1, 4, 2.0, 42) * 4;
+      const height = fbm(x * 0.1, 0, z * 0.1, 4) * 4;
 
       positions.setY(i, height);
     }
