@@ -128,6 +128,8 @@ pnpm install @jbcom/strata
 
 // Import and use
 import { ProceduralSky } from '@jbcom/strata';
+import { useState } from 'react';
+import { useFrame } from '@react-three/fiber';
 
 function Scene() {
     const [time, setTime] = useState(0);

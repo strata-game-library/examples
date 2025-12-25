@@ -467,7 +467,17 @@ export function Example_UnderwaterEffect() {
  * 
  * @example
  * ```tsx
+ * import { ProceduralSky, createVolumetricFogMeshMaterial } from '@jbcom/strata';
+ * import * as THREE from 'three';
+ * 
  * function AtmosphericScene() {
+ *     const fogMaterial = createVolumetricFogMeshMaterial({
+ *         color: new THREE.Color(0.7, 0.8, 0.9),
+ *         density: 0.02,
+ *         height: 10,
+ *         cameraPosition: new THREE.Vector3(0, 5, 10),
+ *     });
+ *
  *     return (
  *         <>
  *             {/* Procedural sky background *\/}

@@ -56,58 +56,71 @@ function Scene() {
         },
     });
 
-    let timeOfDay = { sunAngle, sunIntensity, ambientLight, starVisibility, fogDensity };
-    let weather = { intensity: weatherIntensity };
-
-    // Apply preset overrides
-    if (preset === 'dawn') {
-        timeOfDay = {
+    // Preset configurations
+    const PRESETS = {
+        dawn: {
             sunAngle: 10,
             sunIntensity: 0.4,
             ambientLight: 0.3,
             starVisibility: 0.5,
             fogDensity: 0.3,
-        };
-    } else if (preset === 'noon') {
-        timeOfDay = {
+        },
+        noon: {
             sunAngle: 90,
             sunIntensity: 1.0,
             ambientLight: 1.0,
             starVisibility: 0,
             fogDensity: 0,
-        };
-    } else if (preset === 'sunset') {
-        timeOfDay = {
+        },
+        sunset: {
             sunAngle: 15,
             sunIntensity: 0.8,
             ambientLight: 0.4,
             starVisibility: 0.2,
             fogDensity: 0.2,
-        };
-    } else if (preset === 'night') {
-        timeOfDay = {
+        },
+        night: {
             sunAngle: 0,
             sunIntensity: 0,
             ambientLight: 0.1,
             starVisibility: 1.0,
             fogDensity: 0.1,
-        };
-    } else if (preset === 'stormy') {
-        timeOfDay = {
+        },
+        stormy: {
             sunAngle: 45,
             sunIntensity: 0.3,
             ambientLight: 0.3,
             starVisibility: 0,
             fogDensity: 0.8,
-        };
-        weather = { intensity: 0.8 };
+            weather: { intensity: 0.8 },
+        },
+    };
+
+    let timeOfDay = { sunAngle, sunIntensity, ambientLight, starVisibility, fogDensity };
+    let weather = { intensity: weatherIntensity };
+
+    // Apply preset overrides
+    if (preset !== 'custom' && PRESETS[preset as keyof typeof PRESETS]) {
+        const p = PRESETS[preset as keyof typeof PRESETS];
+        timeOfDay = { ...timeOfDay, ...p };
+        if ('weather' in p) {
+            weather = p.weather;
+        }
     }
+
+    // Calculate sun position in a more natural arc
+    const sunAngleRad = (timeOfDay.sunAngle * Math.PI) / 180;
+    const sunPosition: [number, number, number] = [
+        Math.cos(sunAngleRad) * 50,
+        Math.sin(sunAngleRad) * 50,
+        20 // Slight offset on Z for better shadows
+    ];
 
     return (
         <>
             {/* Directional light representing the sun */}
             <directionalLight
-                position={[0, Math.sin((timeOfDay.sunAngle * Math.PI) / 180) * 50, 50]}
+                position={sunPosition}
                 intensity={timeOfDay.sunIntensity * 2}
                 color="#fffef0"
             />
