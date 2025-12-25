@@ -1,23 +1,14 @@
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sky, Stats } from '@react-three/drei';
-import { useControls, button, folder } from 'leva';
-import { useMemo, useRef, useState, useEffect } from 'react';
+import { useControls } from 'leva';
+import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import {
     createGrassInstances,
     createTreeInstances,
     createRockInstances,
-    Water,
-    ProceduralSky,
-    createVegetationMesh,
-    generateInstanceData,
     fbm,
-    noise3D,
-    getTerrainHeight,
-    sdTerrain,
-    getBiomeAt,
 } from '@jbcom/strata';
-import type { BiomeData } from '@jbcom/strata';
 
 /**
  * Vegetation Showcase Example
@@ -92,7 +83,7 @@ function ProceduralTerrain() {
         }
     );
 
-    const { geometry, colorData } = useMemo(() => {
+    const { geometry } = useMemo(() => {
         const geo = new THREE.PlaneGeometry(size, size, segments, segments);
         geo.rotateX(-Math.PI / 2);
 
@@ -105,16 +96,16 @@ function ProceduralTerrain() {
             const z = positions.getZ(i);
 
             // Base terrain using FBM (Fractional Brownian Motion)
-            const baseHeight = fbm(x * 0.02, z * 0.02, octaves, roughness, seed) * amplitude;
+            const baseHeight = fbm(x * 0.02, 0, z * 0.02, octaves) * amplitude;
 
             // Large-scale features (mountains and valleys)
-            const largeScale = fbm(x * 0.008, z * 0.008, 4, 2.0, seed + 100) * amplitude * 1.5;
+            const largeScale = fbm(x * 0.008, 0, z * 0.008, 4) * amplitude * 1.5;
 
             // Medium-scale features (hills)
-            const mediumScale = fbm(x * 0.04, z * 0.04, 3, 2.5, seed + 200) * amplitude * 0.5;
+            const mediumScale = fbm(x * 0.04, 0, z * 0.04, 3) * amplitude * 0.5;
 
             // Small-scale detail (bumps and dips)
-            const smallScale = fbm(x * 0.1, z * 0.1, 2, 3.0, seed + 300) * amplitude * 0.2;
+            const smallScale = fbm(x * 0.1, 0, z * 0.1, 2) * amplitude * 0.2;
 
             // River valley carved through terrain
             const distanceFromRiver = Math.abs(z - 10 + Math.sin(x * 0.05) * 15);
@@ -130,8 +121,8 @@ function ProceduralTerrain() {
             positions.setY(i, height);
 
             // Color based on height and biome
-            const biomeValue = fbm(x * 0.03, z * 0.03, 3, 2.0, seed + 500);
-            const moisture = fbm(x * 0.05, z * 0.05, 2, 2.0, seed + 600);
+            const biomeValue = fbm(x * 0.03, 0, z * 0.03, 3);
+            const moisture = fbm(x * 0.05, 0, z * 0.05, 2);
 
             let color = new THREE.Color();
 
@@ -184,44 +175,42 @@ function VegetationInstances() {
 
     const { grassCount, treeCount, rockCount, areaSize, seed } = controls;
 
-    // Define biomes for vegetation placement
-    const biomes: BiomeData[] = useMemo(() => [
+    const biomes: any[] = useMemo(() => [
         {
             name: 'grassland',
+            type: 'forest',
+            center: new THREE.Vector2(0, 0),
+            radius: 1000,
             threshold: 0,
             color: 0x3a5a2a,
             vegetation: 1.0,
         },
         {
             name: 'forest',
+            type: 'forest',
+            center: new THREE.Vector2(100, 100),
+            radius: 50,
             threshold: 0.3,
             color: 0x2a4a1a,
             vegetation: 1.5,
         },
         {
             name: 'rocky',
+            type: 'mountain',
+            center: new THREE.Vector2(-100, -100),
+            radius: 50,
             threshold: 0.7,
             color: 0x5a5a4a,
             vegetation: 0.3,
         },
     ], []);
 
-    // Advanced height function matching terrain logic
+    // Simple height function matching terrain
     const heightFunction = (x: number, z: number) => {
-        const amplitude = 8;
-        const octaves = 6;
-        const roughness = 2.2;
-        
-        const baseHeight = fbm(x * 0.02, z * 0.02, octaves, roughness) * amplitude;
-        const largeScale = fbm(x * 0.008, z * 0.008, 4, 2.0) * amplitude * 1.5;
-        const mediumScale = fbm(x * 0.04, z * 0.04, 3, 2.5) * amplitude * 0.5;
-        const smallScale = fbm(x * 0.1, z * 0.1, 2, 3.0) * amplitude * 0.2;
-        
-        const distanceFromRiver = Math.abs(z - 10 + Math.sin(x * 0.05) * 15);
-        const riverCarve = Math.max(0, 1 - distanceFromRiver / 20) * -3;
-        
-        let height = baseHeight + largeScale + mediumScale + smallScale + riverCarve;
-        return Math.max(-0.5, height);
+        const height =
+            Math.sin(x * 0.1) * Math.cos(z * 0.1) * 2 +
+            Math.sin(x * 0.05) * Math.sin(z * 0.05) * 3;
+        return Math.max(0, height);
     };
 
     const grassMesh = useMemo(() => {
@@ -296,7 +285,7 @@ function Scene() {
             />
 
             {/* Stats - for development/demo only */}
-            {process.env.NODE_ENV === 'development' && <Stats />}
+            {import.meta.env.DEV && <Stats />}
         </>
     );
 }

@@ -1,27 +1,10 @@
-# Dependencies
 node_modules/
-
-# Build output
 dist/
-
-# IDE
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
 .vscode/
 .idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-npm-debug.log*
-pnpm-debug.log*
-
-# Environment
-.env
-.env.local
-
-# Vite
-*.local
+.pnpm-debug.log*

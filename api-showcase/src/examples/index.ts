@@ -57,10 +57,8 @@ export const EXAMPLE_STATS = {
     totalExamples: 26,
     totalAPIs: 18,
     categories: {
-        basic: 5,
-        advanced: 9,
-        complete: 3,
-        preset: 8,
-        core: 1,
+        basic: 12,
+        advanced: 10,
+        complete: 4,
     },
 };

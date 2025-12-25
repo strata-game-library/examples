@@ -158,7 +158,7 @@ function Scene() {
             />
 
             {/* Stats - for development/demo only */}
-            {process.env.NODE_ENV === 'development' && <Stats />}
+            {import.meta.env.DEV && <Stats />}
         </>
     );
 }

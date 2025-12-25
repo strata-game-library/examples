@@ -12,11 +12,13 @@
   "scripts": {
     "build": "pnpm -r build",
     "build:all": "pnpm build && node scripts/collect-dist.js",
+    "dev": "pnpm -r dev",
     "dev:terrain": "pnpm --filter basic-terrain dev",
     "dev:water": "pnpm --filter water-scene dev",
     "dev:sky": "pnpm --filter sky-volumetrics dev",
     "dev:vegetation": "pnpm --filter vegetation-showcase dev",
     "dev:api": "pnpm --filter api-showcase dev",
+    "lint": "pnpm -r lint",
     "typecheck": "pnpm -r typecheck",
     "test:visual": "playwright test"
   },
