@@ -20,3 +20,12 @@
 
 ### For Next Agent
 - [ ] No immediate tasks. The MCP configuration is ready for use.
+## Session: 2025-12-25
+### Completed
+- [x] Rebased feat/initial-examples onto main and resolved conflicts.
+- [x] Fixed vegetation height mismatch in vegetation-showcase.
+- [x] Fixed water shader wave displacement axis in water-scene.
+- [x] Added missing imports and definitions to READMEs and API showcase examples.
+- [x] Refactored sky-volumetrics presets and fixed sun arc positioning.
+- [x] Verified workspace builds and typechecks.
+- [x] Merged PR #1.

@@ -29,9 +29,9 @@ function WaterPlane() {
 
           // Multi-layered wave animation
           float wave1 = sin(pos.x * 0.5 + uTime) * 0.3;
-          float wave2 = sin(pos.z * 0.3 + uTime * 0.7) * 0.2;
-          float wave3 = sin((pos.x + pos.z) * 0.2 + uTime * 1.3) * 0.15;
-          pos.y += wave1 + wave2 + wave3;
+          float wave2 = sin(pos.y * 0.3 + uTime * 0.7) * 0.2;
+          float wave3 = sin((pos.x + pos.y) * 0.2 + uTime * 1.3) * 0.15;
+          pos.z += wave1 + wave2 + wave3;
 
           vPosition = (modelMatrix * vec4(pos, 1.0)).xyz;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);

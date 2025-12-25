@@ -4,3 +4,5 @@
 - [x] Create `.cursor/mcp.json` for 21st.dev Magic MCP integration.
 - [x] Initialize Memory Bank.
 - [x] Complete session summary.
+## 2025-12-25
+- [x] Rebase, bug fixes, and merge of initial examples PR.

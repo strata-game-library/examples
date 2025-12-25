@@ -206,12 +206,22 @@ function VegetationInstances() {
         },
     ], []);
 
-    // Simple height function matching terrain
+    // Advanced height function matching terrain logic
     const heightFunction = (x: number, z: number) => {
-        const height =
-            Math.sin(x * 0.1) * Math.cos(z * 0.1) * 2 +
-            Math.sin(x * 0.05) * Math.sin(z * 0.05) * 3;
-        return Math.max(0, height);
+        const amplitude = 8;
+        const octaves = 6;
+        const roughness = 2.2;
+        
+        const baseHeight = fbm(x * 0.02, z * 0.02, octaves, roughness) * amplitude;
+        const largeScale = fbm(x * 0.008, z * 0.008, 4, 2.0) * amplitude * 1.5;
+        const mediumScale = fbm(x * 0.04, z * 0.04, 3, 2.5) * amplitude * 0.5;
+        const smallScale = fbm(x * 0.1, z * 0.1, 2, 3.0) * amplitude * 0.2;
+        
+        const distanceFromRiver = Math.abs(z - 10 + Math.sin(x * 0.05) * 15);
+        const riverCarve = Math.max(0, 1 - distanceFromRiver / 20) * -3;
+        
+        let height = baseHeight + largeScale + mediumScale + smallScale + riverCarve;
+        return Math.max(-0.5, height);
     };
 
     const grassMesh = useMemo(() => {
