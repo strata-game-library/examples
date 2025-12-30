@@ -1,61 +1,45 @@
-# @strata/examples
+# Org-Specific Overrides
 
-Example applications for [Strata 3D](https://strata.game).
+Place files here to override enterprise defaults from jbcom/control-center.
 
-## 📚 Documentation
+## Directory Structure
 
-**Full documentation is available at [strata.game](https://strata.game)**
+```
+repository-files/
+├── always-sync/          # From enterprise (don't edit)
+├── initial-only/         # From enterprise (don't edit)  
+├── python/               # From enterprise (don't edit)
+├── nodejs/               # From enterprise (don't edit)
+├── go/                   # From enterprise (don't edit)
+├── rust/                 # From enterprise (don't edit)
+├── terraform/            # From enterprise (don't edit)
+└── org-overrides/        # YOUR ORG CUSTOMIZATIONS HERE
+    ├── .github/
+    │   └── workflows/    # Org-specific workflows
+    ├── .cursor/
+    │   └── rules/        # Org-specific Cursor rules
+    ├── CLAUDE.md         # Org-specific Claude instructions
+    └── AGENTS.md         # Org-specific agent instructions
+```
 
-- [Live Showcase](https://strata.game/showcase/)
-- [Getting Started](https://strata.game/getting-started/)
-- [API Reference](https://strata.game/api/)
+## Merge Order
 
----
-
-## 🏢 Enterprise Context
-
-**Strata** is the Games & Procedural division of the [jbcom enterprise](https://jbcom.github.io). This repository provides example applications for Strata 3D, showcasing the unified design system and interconnections with sibling organizations like [Agentic](https://agentic.dev) and [Extended Data](https://extendeddata.dev).
+When syncing to repos, files are applied in this order:
+1. Enterprise `always-sync/` (base)
+2. Language-specific rules (python/, nodejs/, etc.)
+3. **Org overrides** (this directory - wins on conflicts)
+4. `initial-only/` (only if file doesn't exist)
 
 ## Examples
 
-| Example | Description | Port |
-|---------|-------------|------|
-| `basic-terrain` | Simple procedural terrain with heightmap generation | 3000 |
-| `water-scene` | Advanced water rendering with reflections and waves | 3001 |
-| `vegetation-showcase` | GPU-instanced vegetation with wind animation | 3002 |
-| `sky-volumetrics` | Procedural sky, clouds, and volumetric effects | 3003 |
-| `api-showcase` | Comprehensive API examples for all systems | 3004 |
-
-## Getting Started
-
+### Override CI workflow for your org
 ```bash
-# Clone the repository
-git clone https://github.com/strata-game-library/examples.git
-cd examples
-
-# Install dependencies
-pnpm install
-
-# Run an example
-pnpm dev:terrain    # Basic terrain
-pnpm dev:water      # Water scene
-pnpm dev:sky        # Sky & volumetrics
-pnpm dev:vegetation # Vegetation showcase
-pnpm dev:api        # API showcase
+cp repository-files/always-sync/.github/workflows/ci.yml \
+   repository-files/org-overrides/.github/workflows/ci.yml
+# Then edit ci.yml with org-specific changes
 ```
 
-## Requirements
-
-- Node.js 18+
-- pnpm 8+
-- Modern browser with WebGL2 support
-
-## Related
-
-- [Strata Documentation](https://strata.game) - Full documentation
-- [Strata Core](https://github.com/strata-game-library/core) - Main library
-- [Strata Presets](https://github.com/strata-game-library/presets) - Pre-configured settings
-
-## License
-
-MIT © [Jon Bogaty](https://github.com/jbcom)
+### Add org-specific Cursor rule
+```bash
+echo "# My Org Rule" > repository-files/org-overrides/.cursor/rules/my-org.mdc
+```
